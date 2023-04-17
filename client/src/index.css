@@ -11,3 +11,104 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Nav Bar Styling*/
+
+.nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /*position:fixed; Do this later!*/
+  width: 100%;
+  
+}
+
+.navlogo{
+  display: flex;
+  flex-direction: row;
+  padding: 10px 5%;
+}
+
+.navmenu a{
+  padding: 0 10px;
+}
+
+.navmenu{
+  padding: 0 5%;
+}
+
+button{
+  padding: 10px 30px;
+  border-radius: 25px;
+  border: 1px solid darkgray;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* Home Styling*/
+.storeimage{
+  width: 100%;
+}
+.info{
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-around;
+  align-items: center;
+}
+.info section{
+  width: 50%;
+  padding: 8% 5%;
+  
+}
+
+.hours{
+  text-align: center;
+  background-color: #EEE5DA;
+}
+
+.resourcehome{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8% 10%;
+}
+
+
+
+/* Footer Styling*/
+
+footer{
+  background-color: #0067A7;
+  color: white;
+  padding: 10px 10%;
+}
+.footerinfo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.footerlogos{
+  display: flex;
+  align-items: center;
+}
+
+.footerlogos svg{
+  color: #D99800;
+  padding-right: 10px;
+  font-size: 12px
+}
+
+.footer h1{
+  font-size: 14px;
+}
+
+.footer p{
+  font-size: 12px;
+}
+
+.footer a{
+  color: white;
+  font-size: 12px;
+  text-decoration-line: none;
+}
+
