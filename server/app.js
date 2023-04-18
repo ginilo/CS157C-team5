@@ -1,12 +1,16 @@
+//express dependency
 const express = require('express');
 const app = express();
 
+
+
+//listening port number
 const PORT_NUMBER = 5000;
 
 app.use(express.json());
 
-const redis = require('redis');
-const client = redis.createClient();
+//redis client
+const client = require('./redisClient')
 
 client.connect();
 
