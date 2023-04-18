@@ -6,10 +6,34 @@ import { faShoppingBasket, faNewspaper, faQuestion} from '@fortawesome/free-soli
 export default function Home() {
   return (
     <div class="home">
-        <img class = "storeimage" src="https://i.ibb.co/vHGn1p5/storeimage.png" alt="storeimage" border="0"></img>
+       <img class = "storeimage" src="https://i.ibb.co/vHGn1p5/storeimage.png" alt="storeimage" border="0" />
+
+      <div class = "info">
+        <section>
+      <div class = "stats">
+        <p class = "number" data-count = "2100"><b>2,100</b></p>
+        <p>students served monthly</p>
+      </div>
+      <div class = "stats">
+        <p class = "number" data-count = "25500"><b>25,500</b></p>
+        <p>students served in the year 2021 - 2022</p>
+      </div>
+      
+      <div class = "stats">
+        <p class = "number" data-count = "22"><b>22%</b></p>
+        <p>increase of students served since our first whole year opening</p>
+      </div>
+      
+      
+      
+      </section>
+      <a href = "https://leahspantry.org/programs/the-nutrition-pantry-program/" target="_blank" rel="noreferrer" ><img src="https://i.ibb.co/HKxwwg1/Gold-Cert-Leahs-Pantry.png" alt="Gold-Cert-Leahs-Pantry" border="0" /> </a>
+      
+      </div>
       <div class="info">
         <section>
-          <h2>Get the food and nutrition you need</h2>
+          <h1 class = "heading">Get the food and nutrition you need</h1>
+          <br/><br/><br/><br/>
           <p class = "intro">
             The Spartan Food Pantry is a walk-in, full-service, staffed, food
             assistance program offering non-perishable goods, fresh produce, and
@@ -19,6 +43,8 @@ export default function Home() {
         </section>
 
         <section>
+        
+        <div class = "cardinfo">
         <FontAwesomeIcon icon = {faShoppingBasket}/>
         <div>
           <h2>Order in advance</h2>
@@ -27,7 +53,9 @@ export default function Home() {
             what is available in store online. <Link to="/orders">Learn more.</Link>
           </p>
           </div>
+          </div>
           
+          <div class = "cardinfo">
           <FontAwesomeIcon icon = {faNewspaper}/>
           <div>
           <h2>Apply to Calfresh</h2>
@@ -36,6 +64,8 @@ export default function Home() {
             Coordinator. <a href = "https://www.sjsu.edu/sjsucares/get-assistance/calfresh.php">Learn more!</a>
           </p>
           </div>
+          </div>
+          <div class = "cardinfo">
           <FontAwesomeIcon icon = {faQuestion}/>
           <div>
           <h2>Need Help?</h2>
@@ -44,11 +74,18 @@ export default function Home() {
             us.</Link>
           </p>
           </div>
+          </div>
         </section>
       </div>
 
       <div class = "info hours">
         <section>
+          <h2>Spring Eligibility</h2>
+          <p>Currently enrolled in Spring courses</p>
+          <p>Currently experiencing hunger/food insecurity</p>
+          <p>Must have an annual income of $30,268 or less (no documentation required)</p>
+          <p>Income limits are set by US Government at 235% of the Federal Poverty Line. $2,522 monthly for individuals of a household of 1; add $889 per additional household member. Please ask if you have questions.</p>
+          <p>Must bring your Tower ID & reusable bag(s) every time you visit the pantry</p>
             <h2>Come Visit Us</h2>
             <h3>Spring 2023 Hours</h3>
             <p>Monday & Friday: 10 AM - 5PM</p>
