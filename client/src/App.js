@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Orders from "./pages/Orders";
 import Resources from "./pages/Resources";
+import Profile from "./pages/Profile";
+import Cart from "./pages/Cart";
 import {Route, Routes} from "react-router-dom";
 import './App.css';
 
@@ -13,9 +15,12 @@ function App() {
       <Navbar />
       <Routes>
         <Route path = "/" element = {<Home />} />
-        <Route path = "/orders" element = {<Orders />} />
-        <Route path = "/resources" element = {<Resources />} />
-        <Route path = "/contact" element = {<Contact/>} />
+        <Route path = "/Orders" element = {<Orders />} />
+        <Route path = "/Resources" element = {<Resources />} />
+        <Route path = "/Contact" element = {<Contact/>} />
+        <Route path = "/Cart" element = {<Cart />} />
+        <Route path = "/Profile" element = {<Profile />} />
+
       </Routes>
       <Footer />
     </div>
