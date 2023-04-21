@@ -46,7 +46,6 @@ export default function Footer(){
             <div class = "footerinfo">
                 <p>Copyright 2023 SJSU Pantry</p>
                 <p>All Rights Reserved</p>
-                <p>Privacy Policy</p>
             </div>
         </footer>
     )
