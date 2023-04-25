@@ -27,7 +27,6 @@ app.use("/orders", orders)
 
 app.post("/account/create", async (req, res) => {
     const id = await client.incr("next_account_id"); 
-    const key = "account_" + id;
 
     const username = req.body.username;
     const password = req.body.password;
@@ -35,8 +34,8 @@ app.post("/account/create", async (req, res) => {
     const name = req.body.name;
 
     try{
-        await client.hSet(key, {
-            username: username,
+        await client.hSet(username, {
+            account_id: id,
             password: password,
             account_type: account_type,
             name: name
