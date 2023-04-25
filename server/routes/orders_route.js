@@ -2,25 +2,41 @@ const express = require('express');
 const router = express.Router();
 const client = require('../redisClient')
 
-router.get('/', (req, res) => {
-    res.send('orders route here')
+
+router.get('/', async (req, res) => {
+    try {    
+        const allOrdersList = await client.keys("order_*")
+        const orders = await getOrders(allOrdersList);
+        res.status(200).json({ orders: orders})
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
 })
+
+async function getOrders(order_ids) {
+    try {
+        let orderList = [];
+        for (let i = 0; i < order_ids.length; i ++ ) {
+            const item = await client.hGetAll(order_ids[i])
+            orderList.push(item)
+        }
+        return orderList;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 
 router.get("/:id", async (req, res) => {
     const key = "orders_" + req.params.id;
+
     try {
-        const orders = await client.sMembers(key);
-        console.log(orders)
         const responseJson = {};
         responseJson['account_id'] = req.params.id;
-        let orderList = [];
-        orders.forEach(async (order_id) => {
-            const item = await client.hGetAll(order_id);
-            console.log(item);
-            orderList.push(item);
-        })
+        const orders = await client.sMembers(key);
+        const orderList = await getOrders(orders);
         responseJson['orders'] = orderList;
-        res.status(200).json(responseJson);
+        res.status(200).send(responseJson);
     } catch (err) {
         res.status(500).send(err.message)
     }
