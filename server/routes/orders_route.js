@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
     try {    
         const allOrdersList = await client.keys("order_*")
         const orders = await getOrders(allOrdersList);
-        res.status(200).json({ orders: orders})
+        res.status(200).send(orders)
     } catch (err) {
         res.status(500).send(err.message)
     }
@@ -31,12 +31,9 @@ router.get("/:id", async (req, res) => {
     const key = "orders_" + req.params.id;
 
     try {
-        const responseJson = {};
-        responseJson['account_id'] = req.params.id;
-        const orders = await client.sMembers(key);
+        const orders = await client.lRange(key, 0, -1);
         const orderList = await getOrders(orders);
-        responseJson['orders'] = orderList;
-        res.status(200).send(responseJson);
+        res.status(200).send(orderList)
     } catch (err) {
         res.status(500).send(err.message)
     }
@@ -45,17 +42,28 @@ router.get("/:id", async (req, res) => {
 
 
 router.post("/create", async (req, res) => {
+    if (req.session.user == null) {
+        res.status(401).send("not logged in")
+        return;
+    }
     const id = await client.incr("next_order_id");
     const key = "order_" + id;
-    const order = req.body
-    const account_id = req.body.account_id;
-    const setKey = "orders_" + account_id;
+    const products = req.body.products
+    const account_id = req.session.user.account_id;
+    const pickup_date = req.body.pickup_date;
+    const listKey = "orders_" + account_id;
+    const status = "Placed";
+    const placeDate = new Date().toDateString();
     try {
-        for (let x in order) {
-            await client.sAdd(setKey, key);
-            await client.hSet(key, x, order[x]);
+        await client.lPush(listKey, key);
+        for (const x in products) {
+            await client.hSet(key, x, products[x]);
         }
-        res.status(200).send("done");
+        await client.hSet(key, "account_id", account_id);
+        await client.hSet(key, "pickup_date", pickup_date);
+        await client.hSet(key, "status", status);
+        await client.hSet(key, "order_placed", placeDate);
+        res.status(201).send("done");
     } catch (err) {
         res.status(500).send(err.message)
     }
