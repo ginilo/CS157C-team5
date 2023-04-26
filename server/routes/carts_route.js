@@ -3,6 +3,10 @@ const router = express.Router();
 const client = require('../redisClient')
 
 router.get('/', async (req, res) => {
+    if (req.session.user == null) {
+        res.status(401).send("not logged in")
+        return;
+    }
     const account_id = req.session.user.account_id;
     try {
         const cart = await client.hGetAll(account_id)
@@ -13,6 +17,10 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/add', async (req, res) => {
+    if (req.session.user == null) {
+        res.status(401).send("not logged in");
+        return;
+    }
     const product_id = req.body.product_id;
     const quantity = req.body.quantity;
     const account_id = req.session.user.account_id;
