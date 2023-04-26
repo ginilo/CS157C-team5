@@ -13,6 +13,9 @@ export default function Resources(){
         <li><a href = "https://powerforms.docusign.net/589bd4c3-9b9c-4374-a5b1-7a1ddc369f77?env=na2&accountId=d5fdc460-bf43-4583-84e8-a2d50bf77419">Volunteer Waiver Agreement</a> </li>
         <li><a href = "https://www.youtube.com/watch?v=eGBIMQ58sM4">Volunteer Orientation Video </a></li>
         <li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSeSHPCA9qcSsmdo4Juvm_Nb0hJgem-LIzcjZJz6budt33oVug/viewform">Self-Certification of Vaccination Status Form</a> </li>
+        <li><a href = "https://sjsu.qualtrics.com/jfe/form/SV_0vqFXWJuIBOkfUV">Intake & User Agreement</a> </li>
+        <li><a href = "https://sjsu.qualtrics.com/jfe/form/SV_0cd2JL5wGwNl3Nz?mkt_tok=eyJpIjoiTkRBM00ySXdObUkwTlRaayIsInQiOiJjYlFwMTNJSnRLWGFHN3QxQlBpRnZsbDVUQmR0ODhTOURxdmlVd3VHMmM2SUlHS1A0Z1wvMGNpSmpZTUZHem5nR3FcL3NERHhyNElmMnFPeHBseFZqekt1TEh2UVBOYStIcWZnYkRUUmVjd05DTmd4VEdBcU9GVFBwdTlcL1c1R3Z2TyJ9">COVID-19 Symptom Check Tool</a> </li>
+        <li><a href = "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-product-dating">Food Product Dating</a> </li>
         </ul>
 
         <hr />
