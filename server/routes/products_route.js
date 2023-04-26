@@ -80,4 +80,53 @@ router.get('/item/:id', async (req, res) => {
     }
 })
 
+
+router.post('/item/update', async (req, res) => {
+    const product_id = req.body.product_id;
+    const quantity = req.body.quantity;
+    const name = req.body.name;
+    const image_url = req.body.image_url;
+    const category = req.body.category;
+
+    try {
+        const oldCategory = await client.hGet(product_id, "category")
+        await client.sRem(oldCategory, product_id)
+        await client.sAdd(category, product_id)
+        await client.sAdd("categories", category)
+
+        await client.hSet(product_id, {
+            "quantity": quantity,
+            "name": name,
+            "image_url": image_url,
+            "category": category
+        })
+        res.status(200).send("done");
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+})
+
+router.delete('/item/delete/:id', async (req, res) => {
+    const product_id = req.params.id;
+    try {
+        const keys = await client.hKeys(product_id);
+        const category = await client.hGet(product_id, "category");
+        for (let i = 0; i < keys.length; i++) {
+            await client.hDel(product_id, keys[i]);
+        }
+        await client.sRem(category, product_id);
+        res.status(200).send("done");
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+})
+
+router.get('/category/categories/all', async (req, res) => {
+    try {
+        const categories = await client.sMembers("categories");
+        res.status(200).send(categories);
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+})
 module.exports = router;
