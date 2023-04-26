@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Orders(){
-    return <h1>Orders</h1>
+    return <div class = "orders"><h1>Orders</h1></div>
 }

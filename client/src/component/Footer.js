@@ -1,13 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import {faPhone} from '@fortawesome/free-solid-svg-icons';
-import { faInstagram, faFacebook} from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faFacebook, faTwitter} from '@fortawesome/free-brands-svg-icons';
+import { Link } from "react-router-dom";
 
 
 export default function Footer(){
     return(
         <footer className = "footer">
             <div class = "footerinfo">
+            <section>
+            <Link to="/">
+          <img
+            src="https://i.ibb.co/Mc6LfDh/logo.png"
+            alt="logo"
+            border="0"
+          ></img>
+        </Link>
+            </section>
             <section>
                 <h1>SJSU Cares</h1>
                 <p>Clark Hall - Room 140</p>
@@ -23,7 +33,7 @@ export default function Footer(){
             <section>
                 <h1>Spring Term Pantry Hours</h1>
                 <p>Monday & Friday 10AM - 5PM</p>
-                <p>Tuesday - Thursday 10Am - 6PM</p>
+                <p>Tuesday - Thursday 10AM - 6PM</p>
             </section>
             </div>
 
@@ -39,6 +49,9 @@ export default function Footer(){
                 </div>
                 <div class = "footerlogos">
                 <a href = "https://www.instagram.com/SJSUCaresBasicNeeds/"><FontAwesomeIcon icon = {faInstagram}/>Check out our Instagram</a>
+                </div>
+                <div class = "footerlogos">
+                <a href = "https://twitter.com/SJSUCares"><FontAwesomeIcon icon = {faTwitter}/>Keep up with our Twiiter</a>
                 </div>
             </div>
             <hr></hr>

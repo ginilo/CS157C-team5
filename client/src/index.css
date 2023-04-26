@@ -18,10 +18,10 @@ code {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /*position:fixed; Do this later!*/
+  position:fixed;
   width: 100%;
-  
-  
+  background-color: #0067A7;
+  color: white;
 }
 
 .navlogo{
@@ -32,10 +32,16 @@ code {
 
 .navmenu a{
   padding: 0 10px;
+  color: white;
 }
 
 .navmenu{
   padding: 0 5%;
+}
+
+.nav button{
+  color: white;
+  border: 1px solid white;
 }
 
 button{
@@ -141,5 +147,69 @@ footer{
 /*Resource Page Styling */
 
 .resources{
-  padding: 50px 10%;
+  padding: 150px 10% 125px 10%;
+}
+
+.resources h1{
+  font-size: 42px;
+}
+
+
+/*Contact Page Styling*/
+
+.contact{
+  text-align: center;
+  padding: 150px 10% 125px 10%;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  padding: 15px 20%;
+  text-align: left;
+}
+
+input{
+  padding-left:30px;
+	margin: 10px 0px;
+	height: 50px;
+	border-style: solid;
+	border-radius: 10px;
+	border-width: 1px;
+	border-color: #AAA8A8;
+	font-size: 15px;
+}
+
+textarea{
+  padding:10px 10px;
+  resize: none;
+  margin: 10px 0px 30px 0px;
+  height: 200px;
+  border-radius: 10px;
+	border-width: 1px;
+	border-color: #AAA8A8;
+	font-size: 15px;
+}
+
+.developers{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Order Page Styling*/
+
+.orders{
+  padding: 150px 10% 125px 10%;
+}
+
+/* Profile Page Styling*/
+
+.profile{
+  padding: 150px 10% 125px 10%;
+}
+
+/* Cart Page Styling*/
+
+.cart{
+  padding: 150px 10% 125px 10%;
 }
