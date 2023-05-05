@@ -6,6 +6,7 @@ import Orders from "./pages/Orders";
 import Resources from "./pages/Resources";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
+import SignUp from "./pages/Signup";
 import {Route, Routes} from "react-router-dom";
 import './App.css';
 
@@ -20,6 +21,7 @@ function App() {
         <Route path = "/Contact" element = {<Contact/>} />
         <Route path = "/Cart" element = {<Cart />} />
         <Route path = "/Profile" element = {<Profile />} />
+        <Route path = "/SignUp" element = {<SignUp />} />
 
       </Routes>
       <Footer />

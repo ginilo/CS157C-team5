@@ -3,6 +3,7 @@ const client = redis.createClient();
 
 async function connect () {
     await client.connect();
+
 }
 
 connect();
