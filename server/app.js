@@ -10,7 +10,7 @@ app.use(session({
 }));
 
 //listening port number
-const PORT_NUMBER = 5000;
+const PORT_NUMBER = 6379;
 
 app.use(express.json());
 

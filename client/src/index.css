@@ -213,3 +213,9 @@ textarea{
 .cart{
   padding: 150px 10% 125px 10%;
 }
+
+/*SignUp Page*/
+.sign-container{
+  text-align: center;
+  padding: 150px 10% 125px 10%;
+}
