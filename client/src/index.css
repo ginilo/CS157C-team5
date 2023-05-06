@@ -219,3 +219,18 @@ textarea{
   text-align: center;
   padding: 150px 10% 125px 10%;
 }
+
+.status{
+  color: red;
+}
+
+/*SignIn Page*/
+
+.signin{
+  text-align: center;
+  padding: 150px 10% 125px 10%;
+}
+
+.error-message{
+  color: red;
+}

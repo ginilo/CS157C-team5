@@ -1,5 +1,7 @@
 //express dependency
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
 
 const session = require('express-session');
@@ -9,8 +11,10 @@ app.use(session({
     secret: "wow a secret"
 }));
 
+app.use(cors());
+
 //listening port number
-const PORT_NUMBER = 6379;
+const PORT_NUMBER = 5000;
 
 app.use(express.json());
 
@@ -20,6 +24,7 @@ const client = require('./redisClient')
 app.get("/", (req, res) => {
     res.send('hello');
 })
+
 
 //routes
 const products = require('./routes/products_route');
@@ -36,6 +41,8 @@ app.use("/account", accounts)
 app.post('/login', async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
+
+    
     if (username && password) {
         try {
             const corrPassword = await client.hGet(username, 'password');
@@ -48,8 +55,7 @@ app.post('/login', async (req, res) => {
                 user['account_id'] = account_id;
                 user['account_type'] = account_type;
                 req.session.user = user;
-
-                res.send('logged in');
+                res.send("logged in");
             }
             else {
                 res.send('Incorrect Password');
@@ -69,6 +75,7 @@ app.get('/logout', (req, res) => {
     res.redirect("/");
 })
 
+
 app.get('/login', (req, res) => {
     if (req.session.user) {
         res.send({loggedIn: true, user: req.session.user});
@@ -77,6 +84,16 @@ app.get('/login', (req, res) => {
     }
 })
 
+client.on('connect', function() {
+    console.log('Connected!');
+  });
+
+
+
+
 app.listen(PORT_NUMBER, () => {
     console.log(`Listening at port ${PORT_NUMBER}`);
 });
+
+
+
