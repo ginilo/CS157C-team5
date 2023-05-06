@@ -2,16 +2,16 @@ import React from "react";
 
 export default function Contact() {
   return (
-    <div class="contact">
+    <div className="contact">
       <h1>Contact Us</h1>
-      <form class="form-container">
-        <label for="name">Name</label>
+      <form className="form-container">
+        <label htmlFor="name">Name</label>
         <input type="text" id="name" name="name" required />
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input type="text" id="email" name="email" required />
-        <label for="subject">Subject</label>
+        <label htmlFor="subject">Subject</label>
         <input type="text" id="subject" name="subject" required />
-        <label for="message">Message</label>
+        <label htmlFor="message">Message</label>
         <textarea id="message" name="message" required></textarea>
 
         <button>Send Message</button>
@@ -21,8 +21,8 @@ export default function Contact() {
 
       <h2>Developers</h2>
 
-      <div class="developers">
-        <div class="dev">
+      <div className="developers">
+        <div className="dev">
           <img
             src="https://i.ibb.co/Mc6LfDh/logo.png"
             alt="logo"
@@ -32,7 +32,7 @@ export default function Contact() {
           <p>angela.yang@sjsu.edu</p>
         </div>
 
-        <div class="dev">
+        <div className="dev">
           <img
             src="https://i.ibb.co/Mc6LfDh/logo.png"
             alt="logo"
@@ -42,7 +42,7 @@ export default function Contact() {
           <p>gini.lo@sjsu.edu</p>
         </div>
 
-        <div class="dev">
+        <div className="dev">
           <img
             src="https://i.ibb.co/Mc6LfDh/logo.png"
             alt="logo"

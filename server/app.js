@@ -5,21 +5,35 @@ const cors = require('cors');
 const app = express();
 
 const session = require('express-session');
+const RedisStore = require("connect-redis").default
+
+//redis client
+const client = require('./redisClient')
+
+
+let redisStore = new RedisStore({
+    client: client,
+  })
+
 app.use(session({
+    store: redisStore,
     resave: false,
     saveUninitialized: false,
-    secret: "wow a secret"
+    secret: "wow a secret",
+    cookie: { maxAge: 3600000, sameSite: true}
 }));
 
-app.use(cors());
+app.use(cors({origin: 'http://localhost:3000', credentials: true}));
 
 //listening port number
 const PORT_NUMBER = 5000;
 
 app.use(express.json());
 
-//redis client
-const client = require('./redisClient')
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+  });
 
 app.get("/", (req, res) => {
     res.send('hello');
@@ -56,6 +70,7 @@ app.post('/login', async (req, res) => {
                 user['account_type'] = account_type;
                 req.session.user = user;
                 res.send("logged in");
+                console.log("login: " + req.sessionID)
             }
             else {
                 res.send('Incorrect Password');
@@ -76,20 +91,15 @@ app.get('/logout', (req, res) => {
 })
 
 
-app.get('/login', (req, res) => {
+app.get('/login', (req, res) => {  
+    
+    console.log("profile: "+ req.sessionID)
     if (req.session.user) {
         res.send({loggedIn: true, user: req.session.user});
     } else {
         res.send({loggedIn: false});
     }
 })
-
-client.on('connect', function() {
-    console.log('Connected!');
-  });
-
-
-
 
 app.listen(PORT_NUMBER, () => {
     console.log(`Listening at port ${PORT_NUMBER}`);

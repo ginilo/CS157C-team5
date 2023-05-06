@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Resources(){
-    return <div class = "resources">
+    return <div className = "resources">
         <h1>Resources</h1>
         <p>The reports and news stories below can be helpful to those who want to have a deeper understanding of the challenges SJSU students face surrounding basic needs and the efforts that are underway at our campus and throughout the CSU system.  </p>
         <p>The links below cover much of the information we are often asked about in interview requests.</p>

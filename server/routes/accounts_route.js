@@ -15,7 +15,6 @@ router.post("/create", async (req, res) => {
 
     try{
         const user = await client.HGETALL(username);
-        console.log(user);
 
         if (Object.keys(user).length !== 0) {res.send("exists")}
         else{await client.hSet(username, {

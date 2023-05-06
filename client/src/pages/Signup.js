@@ -32,6 +32,7 @@ export default function SignUp() {
       headers: {
         "Content-Type": "application/json", // Specify the content type as JSON
       },
+      credentials: 'include',
       body: JSON.stringify(form),
     })
       .then(async (response) => {

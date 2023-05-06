@@ -5,22 +5,22 @@ import { faShoppingBasket, faNewspaper, faQuestion} from '@fortawesome/free-soli
 
 export default function Home() {
   return (
-    <div class="home">
-       <img class = "storeimage" src="https://i.ibb.co/vHGn1p5/storeimage.png" alt="storeimage" border="0" />
+    <div className="home">
+       <img className = "storeimage" src="https://i.ibb.co/vHGn1p5/storeimage.png" alt="storeimage" border="0" />
 
-      <div class = "info">
+      <div className = "info">
         <section>
-      <div class = "stats">
-        <p class = "number" data-count = "2100"><b>2,100</b></p>
+      <div className = "stats">
+        <p className = "number" data-count = "2100"><b>2,100</b></p>
         <p>students served monthly</p>
       </div>
-      <div class = "stats">
-        <p class = "number" data-count = "25500"><b>25,500</b></p>
+      <div className = "stats">
+        <p className = "number" data-count = "25500"><b>25,500</b></p>
         <p>students served in the year 2021 - 2022</p>
       </div>
       
-      <div class = "stats">
-        <p class = "number" data-count = "22"><b>22%</b></p>
+      <div className = "stats">
+        <p className = "number" data-count = "22"><b>22%</b></p>
         <p>increase of students served since our first whole year opening</p>
       </div>
       
@@ -30,11 +30,11 @@ export default function Home() {
       <a href = "https://leahspantry.org/programs/the-nutrition-pantry-program/" target="_blank" rel="noreferrer" ><img src="https://i.ibb.co/HKxwwg1/Gold-Cert-Leahs-Pantry.png" alt="Gold-Cert-Leahs-Pantry" border="0" /> </a>
       
       </div>
-      <div class="info">
+      <div className="info">
         <section>
-          <h1 class = "heading">Get the food and nutrition you need</h1>
+          <h1 className = "heading">Get the food and nutrition you need</h1>
           <br/><br/><br/><br/>
-          <p class = "intro">
+          <p className = "intro">
             The Spartan Food Pantry is a walk-in, full-service, staffed, food
             assistance program offering non-perishable goods, fresh produce, and
             refrigerated items to eligible students. Learn how the pantry got
@@ -44,7 +44,7 @@ export default function Home() {
 
         <section>
         
-        <div class = "cardinfo">
+        <div className = "cardinfo">
         <FontAwesomeIcon icon = {faShoppingBasket}/>
         <div>
           <h2>Order in advance</h2>
@@ -55,7 +55,7 @@ export default function Home() {
           </div>
           </div>
           
-          <div class = "cardinfo">
+          <div className = "cardinfo">
           <FontAwesomeIcon icon = {faNewspaper}/>
           <div>
           <h2>Apply to Calfresh</h2>
@@ -65,7 +65,7 @@ export default function Home() {
           </p>
           </div>
           </div>
-          <div class = "cardinfo">
+          <div className = "cardinfo">
           <FontAwesomeIcon icon = {faQuestion}/>
           <div>
           <h2>Need Help?</h2>
@@ -78,7 +78,7 @@ export default function Home() {
         </section>
       </div>
 
-      <div class = "info hours">
+      <div className = "info hours">
         <section>
           <h2>Spring Eligibility</h2>
           <p>Currently enrolled in Spring courses</p>
@@ -99,7 +99,7 @@ export default function Home() {
         </section>
       </div>
 
-      <div class = "resourcehome">
+      <div className = "resourcehome">
             <h2>Check out some of our resources</h2>
             <Link to ="/resources"><button>Resources</button></Link>
 

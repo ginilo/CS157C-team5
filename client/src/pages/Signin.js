@@ -23,7 +23,7 @@ export default function SignIn() {
           const data = await response.text();
           if (data == "logged in") {
             setValid(true);
-            window.location.href = "/";
+            window.location.href = "/Profile";
           } else {
             setValid(false);
           }
