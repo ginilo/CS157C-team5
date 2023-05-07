@@ -85,6 +85,7 @@ export default function Profile() {
             <p>📞 Phone Number: {data.phone}</p>
             <p>📧 Email: {data.email}</p>
             <p>🌱 Last time visited: </p>
+            <button><a href = "/PreviousOrders">See previous orders</a></button>
             </div>
           
         </div>

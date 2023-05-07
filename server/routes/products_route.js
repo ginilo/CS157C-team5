@@ -42,6 +42,8 @@ router.post("/create", async (req, res) => {
     const quantity = req.body.quantity;
     const image_url = req.body.image_url;
     const category = req.body.category;
+    const allergy = req.body.allergy;
+    
 
     try {
         const fieldsAdded = await client.hSet(key, {
@@ -49,10 +51,13 @@ router.post("/create", async (req, res) => {
             quantity: quantity,
             image_url: image_url,
             category: category,
-            product_id: key
+            product_id: key,
+            allergy: allergy
         })
         await client.sAdd(category, key);
+        await client.sAdd(allergy, key);
         await client.sAdd("categories", category);
+        await client.sAdd("allergy", allergy)
         res.status(200).send('done, fields added: ' + fieldsAdded);
     } catch (err) {
         res.status(500).send(err.message)
@@ -108,14 +113,16 @@ router.post('/item/update', async (req, res) => {
 })
 
 router.delete('/item/delete/:id', async (req, res) => {
+    
     const product_id = req.params.id;
+    
     try {
-        const keys = await client.hKeys(product_id);
-        const category = await client.hGet(product_id, "category");
-        for (let i = 0; i < keys.length; i++) {
-            await client.hDel(product_id, keys[i]);
-        }
-        await client.sRem(category, product_id);
+
+        const category = await client.hGet("product_" + product_id, "category");
+        //await client.sRem(category, product_id);
+        //should only remove when all the items of the category are gone 
+
+        await client.del("product_" + product_id);
         res.status(200).send("done");
     } catch (err) {
         res.status(500).send(err.message)

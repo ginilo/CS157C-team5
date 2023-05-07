@@ -27,8 +27,8 @@ async function getOrders(order_ids) {
 }
 
 
-router.get("/:id", async (req, res) => {
-    const key = "orders_" + req.params.id;
+router.get("/id", async (req, res) => {
+    const key = "orders_" + req.session.user.account_id;
 
     try {
         const orders = await client.lRange(key, 0, -1);
@@ -48,21 +48,29 @@ router.post("/create", async (req, res) => {
     }
     const id = await client.incr("next_order_id");
     const key = "order_" + id;
-    const products = req.body.products
+    
     const account_id = req.session.user.account_id;
-    const pickup_date = req.body.pickup_date;
+
+    const cart = await client.HGETALL("cart_" + account_id);
+    
+    const pickup_date = req.body.pickedDate;
+    
     const listKey = "orders_" + account_id;
     const status = "Placed";
     const placeDate = new Date().toDateString();
     try {
         await client.lPush(listKey, key);
-        for (const x in products) {
-            await client.hSet(key, x, products[x]);
+        for (const x in cart) {
+            await client.hSet(key, x, cart[x]);
+            
         }
         await client.hSet(key, "account_id", account_id);
         await client.hSet(key, "pickup_date", pickup_date);
         await client.hSet(key, "status", status);
         await client.hSet(key, "order_placed", placeDate);
+
+        await client.del("cart_" + account_id);
+
         res.status(201).send("done");
     } catch (err) {
         res.status(500).send(err.message)
