@@ -36,7 +36,7 @@ app.use((req, res, next) => {
   });
 
 app.get("/", (req, res) => {
-    console.log("profile: "+ req.sessionID)
+    //console.log("profile: "+ req.sessionID)
     res.send('hello');
 })
 
@@ -72,7 +72,7 @@ app.post('/login', async (req, res) => {
                 user['account_type'] = account_type;
                 req.session.user = user;
                 res.send("logged in");
-                console.log("login: " + req.sessionID)
+                //console.log("login: " + req.sessionID)
             }
             else {
                 res.send('Incorrect Password');
@@ -95,7 +95,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/login', (req, res) => {  
     
-    console.log("profile: "+ req.sessionID)
+    //console.log("profile: "+ req.sessionID)
     if (req.session.user) {
         res.send({loggedIn: true, user: req.session.user});
     } else {

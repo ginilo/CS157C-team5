@@ -34,7 +34,6 @@ export default function Profile() {
     try {
       await fetch('http://localhost:5000/profile', { credentials: "include", method: "GET" })
       .then(async(response) =>{
-        console.log("hello")
         const jsonData = await response.json();
         setData(jsonData);
       })
