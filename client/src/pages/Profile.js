@@ -67,8 +67,6 @@ export default function Profile() {
 
   return (
     <div className="profile">
-      <h1>My Profile</h1>
-      
       {data ? (
         <div className = "info-container">
 
@@ -77,13 +75,17 @@ export default function Profile() {
           {(data.account_type === 'student' || data.account_type === 'Student') && <p>Student</p>}
           
           <p>{data.fname + " " +  data.lname}</p>
+          <button>Edit Profile</button> 
+    <p></p>
+    <button onClick = {handleLogOut}>Log out</button>
           </div>
 
           <div className = "profileinfo">
-            <p>Username: {data.username}</p>
-            <p>Account ID: {data.account_id}</p>
-            <p>Phone Number: {data.phone}</p>
-            <p>Email: {data.email}</p>
+            <h3>👤 Username: {data.username}</h3>
+            <p>🔒 Account ID: {data.account_id}</p>
+            <p>📞 Phone Number: {data.phone}</p>
+            <p>📧 Email: {data.email}</p>
+            <p>🌱 Last time visited: </p>
             </div>
           
         </div>
@@ -91,7 +93,6 @@ export default function Profile() {
         <p>Loading data...</p>
       )}
     
-    <button onClick = {handleLogOut}>Log out</button>
     </div>
   );
 }
