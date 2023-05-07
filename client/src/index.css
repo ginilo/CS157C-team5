@@ -209,7 +209,7 @@ textarea{
 }
 
 .orders .items{
-  border: 1px solid black;
+  border: 1px solid rgb(200, 197, 197);
   margin-top: 10px;
   width: 275px;
   height: 275px;

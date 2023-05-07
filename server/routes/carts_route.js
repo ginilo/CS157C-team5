@@ -28,6 +28,7 @@ router.post('/add', async (req, res) => {
 
     const cartKey = "cart_" + account_id;
 
+    
     try {
         await client.hSet(cartKey, product_id, quantity)
         res.status(200).send('done')

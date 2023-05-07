@@ -63,7 +63,8 @@ router.post("/create", async (req, res) => {
 async function getProduct(product_id) {
     let item = {}
     try {
-        item = client.hGetAll(product_id)
+        item = await client.hGetAll(product_id)
+        item["product_id"] = product_id;
     } catch (err) {
         console.log(err.message)
     }
