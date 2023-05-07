@@ -43,7 +43,7 @@ export default function PreviousOrders() {
   return (
     <div className="prevOrders">
       <h1>Previous Orders</h1>
-      {data ? (
+      {data && Object.keys(data).length > 0 ? (
         <div className="info-container">
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
