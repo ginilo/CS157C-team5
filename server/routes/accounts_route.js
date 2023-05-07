@@ -7,19 +7,30 @@ router.post("/create", async (req, res) => {
 
     const username = req.body.username;
     const password = req.body.password;
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const fname = req.body.fname;
+    const lname = req.body.lname;
     const account_type = req.body.account_type;
 
     try{
-        await client.hSet(username, {
+        const user = await client.HGETALL(username);
+
+        if (Object.keys(user).length !== 0) {res.send("exists")}
+        else{await client.hSet(username, {
             account_id: id,
             password: password,
             account_type: account_type,
+            email: email,
+            phone: phone,
+            fname: fname,
+            lname: lname
         })
-        res.status(200).send("done");
-
+        res.status(200).send("done");}
     } catch (err) {
         res.status(500).send(err.message)
     }
 })
+
 
 module.exports = router;

@@ -1,26 +1,79 @@
 import { React, useState } from "react";
 
 export default function SignUp() {
-  const [form, setForm] = useState({
+  const initialFormState = {
     fname: "",
     lname: "",
     email: "",
     phone: "",
     username: "",
     password: "",
-  });
+    account_type: "student",
+  };
+
+  const [form, setForm] = useState(initialFormState);
+
+  const resetForm = () => {
+    setForm(initialFormState);
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
 
+  const [submitted, setSubmitted] = useState(false);
+  const [valid, setValid] = useState(true);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await fetch("http://localhost:5000/account/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Specify the content type as JSON
+      },
+      credentials: 'include',
+      body: JSON.stringify(form),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          if (await response.text() == "exists") {
+            setSubmitted(false);
+            setValid(false);
+            return response;
+          } else {
+            setValid(true);
+            setSubmitted(true);
+            resetForm();
+            return response;
+          }
+        } else
+          throw new Error(
+            `Server responded with ${response.status} ${response.statusText}`
+          );
+      })
+      .catch((error) => {
+        console.error("There was an error:", error);
+      });
+  };
+
   return (
-    <div class="sign-container">
+    <div className="sign-container">
       <h1>SJSU Pantry</h1>
-      <form class="form-container">
+
+      <form className="form-container" onSubmit={handleSubmit}>
         <p id="sign-header">Sign Up</p>
-        <label for = "username">Username</label>
+        {submitted && (
+          <div className="status">
+            Success! Thank you for registering!
+          </div>
+        )}
+        {!valid && (
+          <div className="status">
+            This username already exists.
+          </div>
+        )}
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           name="username"
@@ -29,7 +82,7 @@ export default function SignUp() {
           onChange={handleInputChange}
           required
         />
-        <label for = "fname">First Name</label>
+        <label htmlFor="fname">First Name</label>
         <input
           type="text"
           name="fname"
@@ -38,7 +91,7 @@ export default function SignUp() {
           onChange={handleInputChange}
           required
         />
-        <label for = "lname">Last Name</label>
+        <label htmlFor="lname">Last Name</label>
         <input
           type="text"
           name="lname"
@@ -47,7 +100,7 @@ export default function SignUp() {
           onChange={handleInputChange}
           required
         />
-        <label for = "email">Email</label>
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
@@ -56,7 +109,7 @@ export default function SignUp() {
           onChange={handleInputChange}
           required
         />
-        <label for = "phone">Phone</label>
+        <label htmlFor="phone">Phone</label>
         <input
           type="text"
           name="phone"
@@ -64,7 +117,7 @@ export default function SignUp() {
           value={form.phone}
           onChange={handleInputChange}
         />
-        <label for = "password">Password</label>
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
@@ -73,10 +126,10 @@ export default function SignUp() {
           onChange={handleInputChange}
           required
         />
-        <button>Register</button>
+        <button type="submit">Register</button>
       </form>
       <p>
-        Already have an account? <a href="SignIn.js">Sign in</a>
+        Already have an account? <a href="/SignIn">Sign in</a>
       </p>
     </div>
   );

@@ -8,7 +8,7 @@ import { faPortrait} from '@fortawesome/free-solid-svg-icons';
 export default function Navbar() {
   return (
     <nav className="nav">
-      <div class="navlogo">
+      <div className="navlogo">
         <Link to="/">
           <img
             src="https://i.ibb.co/Mc6LfDh/logo.png"
@@ -18,7 +18,7 @@ export default function Navbar() {
         </Link>
         <h1>Spartan Pantry</h1>
       </div>
-      <div class="navmenu">
+      <div className="navmenu">
         <Link to="/Orders">
           <button>Orders</button>
         </Link>

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function Footer(){
     return(
         <footer className = "footer">
-            <div class = "footerinfo">
+            <div className = "footerinfo">
             <section>
             <Link to="/">
           <img
@@ -37,26 +37,26 @@ export default function Footer(){
             </section>
             </div>
 
-            <div class = "footerinfo">
-                <div class = "footerlogos">
+            <div className = "footerinfo">
+                <div className = "footerlogos">
                 <FontAwesomeIcon icon={faPhone} /><p>408-924-1234</p>
                 </div>
-                <div class = "footerlogos">
+                <div className = "footerlogos">
                 <FontAwesomeIcon icon = {faEnvelope}/><p>sjsucares@sjsu.edu</p>
                 </div>
-                <div class = "footerlogos">
+                <div className = "footerlogos">
                 <a href = "https://www.facebook.com/SJSUCaresBasicNeeds/"><FontAwesomeIcon icon={faFacebook} />Follow us on Facebook</a>
                 </div>
-                <div class = "footerlogos">
+                <div className = "footerlogos">
                 <a href = "https://www.instagram.com/SJSUCaresBasicNeeds/"><FontAwesomeIcon icon = {faInstagram}/>Check out our Instagram</a>
                 </div>
-                <div class = "footerlogos">
+                <div className = "footerlogos">
                 <a href = "https://twitter.com/SJSUCares"><FontAwesomeIcon icon = {faTwitter}/>Keep up with our Twiiter</a>
                 </div>
             </div>
             <hr></hr>
 
-            <div class = "footerinfo">
+            <div className = "footerinfo">
                 <p>Copyright 2023 SJSU Pantry</p>
                 <p>All Rights Reserved</p>
             </div>
