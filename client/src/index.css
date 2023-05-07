@@ -202,6 +202,20 @@ textarea{
   padding: 150px 10% 125px 10%;
 }
 
+.orders .item-container{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.orders .items{
+  border: 1px solid black;
+  margin-top: 10px;
+  width: 275px;
+  height: 275px;
+  text-align: center;
+}
+
 /* Profile Page Styling*/
 
 .profile{
@@ -243,6 +257,10 @@ border-radius: 5px;
 
 .cart{
   padding: 150px 10% 125px 10%;
+}
+
+.cart-container{
+  display: flex;
 }
 
 /*SignUp Page*/

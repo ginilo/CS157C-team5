@@ -22,7 +22,7 @@ export default function SignUp() {
     setForm({ ...form, [name]: value });
   };
 
-  const [submitted, setSubmitted] = useState(false);
+  
   const [valid, setValid] = useState(true);
 
   const handleSubmit = async (event) => {
@@ -38,14 +38,12 @@ export default function SignUp() {
       .then(async (response) => {
         if (response.ok) {
           if (await response.text() == "exists") {
-            setSubmitted(false);
+            
             setValid(false);
             return response;
           } else {
             setValid(true);
-            setSubmitted(true);
-            resetForm();
-            return response;
+            window.location.href = "/Profile";
           }
         } else
           throw new Error(
@@ -63,11 +61,7 @@ export default function SignUp() {
 
       <form className="form-container" onSubmit={handleSubmit}>
         <p id="sign-header">Sign Up</p>
-        {submitted && (
-          <div className="status">
-            Success! Thank you for registering!
-          </div>
-        )}
+        
         {!valid && (
           <div className="status">
             This username already exists.
