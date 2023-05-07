@@ -40,10 +40,12 @@ export default function SignUp() {
           if (await response.text() == "exists") {
             setSubmitted(false);
             setValid(false);
+            return response;
           } else {
             setValid(true);
             setSubmitted(true);
             resetForm();
+            return response;
           }
         } else
           throw new Error(

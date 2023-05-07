@@ -27,12 +27,10 @@ router.post("/create", async (req, res) => {
             lname: lname
         })
         res.status(200).send("done");}
-
-        
-
     } catch (err) {
         res.status(500).send(err.message)
     }
 })
+
 
 module.exports = router;

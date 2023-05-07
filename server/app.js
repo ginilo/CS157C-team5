@@ -20,10 +20,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     secret: "wow a secret",
-    cookie: { maxAge: 3600000, sameSite: true}
+    cookie: { maxAge: 3600000}
 }));
 
-app.use(cors({origin: 'http://localhost:3000', credentials: true}));
+app.use(cors({origin: 'http://localhost:3000', methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"], optionsSuccessStatus: 200, credentials: true}));
 
 //listening port number
 const PORT_NUMBER = 5000;
@@ -36,6 +36,7 @@ app.use((req, res, next) => {
   });
 
 app.get("/", (req, res) => {
+    console.log("profile: "+ req.sessionID)
     res.send('hello');
 })
 
@@ -45,6 +46,7 @@ const products = require('./routes/products_route');
 const orders = require('./routes/orders_route');
 const carts = require('./routes/carts_route');
 const accounts = require('./routes/accounts_route')
+
 
 //use the routes
 app.use("/products", products)
@@ -84,9 +86,9 @@ app.post('/login', async (req, res) => {
     }
 })
 
+
 app.get('/logout', (req, res) => {
     req.session.destroy();
-
     res.redirect("/");
 })
 
@@ -99,6 +101,18 @@ app.get('/login', (req, res) => {
     } else {
         res.send({loggedIn: false});
     }
+})
+
+app.get('/profile', async (req, res) => {
+    const user = req.session.user;
+    const username = user.username
+
+    const data = await client.HGETALL(username);
+
+    data['username'] = username;
+    data['password'] = '';
+    
+    res.send(data);
 })
 
 app.listen(PORT_NUMBER, () => {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Navigate} from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
 export default function SignIn() {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -12,6 +12,7 @@ export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await fetch("http://localhost:5000/login", {
+      credentials: 'include',
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Specify the content type as JSON
@@ -43,7 +44,9 @@ export default function SignIn() {
         <h1>SJSU Pantry</h1>
         <form className="form-container" onSubmit={handleSubmit}>
           <p id="sign-header">Login</p>
-          {!valid && <div className='error-message'>Invalid username or password.</div>}
+          {!valid && (
+            <div className="error-message">Invalid username or password.</div>
+          )}
           <input
             type="text"
             name="username"
@@ -63,7 +66,7 @@ export default function SignIn() {
           <button>Login</button>
         </form>
         <p>
-          New to SJSU Pantry? <a href="Signup.js">Create an account</a>
+          New to SJSU Pantry? <a href="/Signup">Create an account</a>
         </p>
       </div>
     </div>

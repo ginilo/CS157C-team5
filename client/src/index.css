@@ -208,6 +208,22 @@ textarea{
   padding: 150px 10% 125px 10%;
 }
 
+.profile .info-container{
+  display: flex;
+  
+}
+
+.info-container .image{
+  width: 40%;
+}
+
+
+.info-container .info{
+  width: 60%;
+}
+
+
+
 /* Cart Page Styling*/
 
 .cart{
