@@ -40,12 +40,37 @@ export default function PreviousOrders() {
     }
   };
 
+  const renderNestedObject = (obj) => {
+  return Object.keys(obj).map((key, index) => {
+    const value = obj[key];
+    if (typeof value === "object" && value !== null) {
+      return (
+        <div key={index}>
+         
+          {renderNestedObject(value)}
+        </div>
+      );
+    } else {
+      return (
+        <p key={index}>
+          {key}: {value}
+        </p>
+      );
+    }
+  });
+};
+
   return (
     <div className="prevOrders">
       <h1>Previous Orders</h1>
       {data && Object.keys(data).length > 0 ? (
         <div className="info-container">
-          <pre>{JSON.stringify(data, null, 2)}</pre>
+          {Object.keys(data).map((key, index) => (
+        <div className="items" key={index}>
+          <p>{key}:</p>
+          {renderNestedObject(data[key])}
+        </div>
+      ))}
         </div>
       ) : (
         <p>You do not have any past orders. </p>

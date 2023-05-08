@@ -84,7 +84,7 @@ export default function Profile() {
             <p>🔒 Account ID: {data.account_id}</p>
             <p>📞 Phone Number: {data.phone}</p>
             <p>📧 Email: {data.email}</p>
-            <p>🌱 Last time visited: </p>
+            <p>🌱 Last time visited: {data.last_visited}</p>
             <button><a href = "/PreviousOrders">See previous orders</a></button>
             </div>
           

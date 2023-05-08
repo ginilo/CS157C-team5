@@ -337,6 +337,17 @@ border-radius: 5px;
   width: 100%;
 }
 
+.cart-items .header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-items .header svg{
+  font-size: 26px;
+  margin-right: 10px;
+}
+
 
 
 .cart-items .items{
@@ -382,6 +393,12 @@ border-radius: 5px;
   padding: 150px 10% 125px 10%;
 }
 
+.prevOrders .items{
+  border: solid 1px rgb(226, 226, 226);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
 /*Employee Portal page*/
 

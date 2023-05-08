@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 
 export default function Cart() {
   useEffect(() => {
@@ -65,7 +67,7 @@ export default function Cart() {
   };
 
   const handleDeleteClick = async (product_id, quantity) => {
-    console.log(quantity)
+    console.log(quantity);
     try {
       await fetch("http://localhost:5000/cart/remove", {
         method: "POST",
@@ -73,7 +75,7 @@ export default function Cart() {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ product_id , quantity}),
+        body: JSON.stringify({ product_id, quantity }),
       }).then(async (response) => {
         console.log("Deleting...");
       });
@@ -88,8 +90,12 @@ export default function Cart() {
       {data && Object.keys(data).length > 0 ? (
         <div className="cart-container">
           <div className="cart-items">
+
+            <div className = "header">
+            <FontAwesomeIcon icon={faShoppingBasket} />
             <h1>My Cart</h1>
-            <h2>Items:</h2>
+            </div>
+
             <hr></hr>
             {data.map((item, index) => (
               <div>
@@ -100,7 +106,13 @@ export default function Cart() {
                   <p>Category: {item.category}</p>
                   <p>Allergy: {item.allergy}</p>
 
-                  <button onClick={() => handleDeleteClick(item.product_id, item.quantity)}>Delete</button>
+                  <button
+                    onClick={() =>
+                      handleDeleteClick(item.product_id, item.quantity)
+                    }
+                  >
+                    Delete
+                  </button>
                 </div>
                 <hr></hr>
               </div>
