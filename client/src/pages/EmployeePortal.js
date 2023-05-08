@@ -192,6 +192,36 @@ export default function EmployeePortal() {
     fetchUFOrders();
   }, []);
 
+  const [selectedOrderId, setSelectedOrderId] = useState("");
+
+  const handleOrderSelection = (event) => {
+    setSelectedOrderId(event.target.value);
+  };
+
+  const fufillOrder = async (event) => {
+    event.preventDefault();
+    await fetch(`http://localhost:5000/orders/FulfillOrder`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Specify the content type as JSON
+      },
+      credentials: "include",
+      body: JSON.stringify({ order_id: selectedOrderId }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          console.log("Fulfilling order...");
+          window.location.reload()
+        } else
+          throw new Error(
+            `Server responded with ${response.status} ${response.statusText}`
+          );
+      })
+      .catch((error) => {
+        console.error("There was an error:", error);
+      });
+  };
+
   return (
     <div className="employee-container">
       <h1>Employee Portal</h1>
@@ -311,29 +341,34 @@ export default function EmployeePortal() {
         <button>Delete</button>
       </form>
 
-      <form>
+      <form onSubmit={fufillOrder}>
         <h1>Orders to be Fulfilled</h1>
-        
+
         {unfulfilleddata && Object.keys(unfulfilleddata).length > 0 ? (
-          <ul className = "uforderList">
-          {unfulfilleddata.map((order, index) => (
-            <li key={index}>
-              <input type="radio" name = 'fulOption' />
-              {`${order.order_id}`}
-              <div className="pendingOrder">
-                {Object.keys(order).map((key) => (
-                  <p>
-                    {key}: {order[key]}
-                  </p>
-                ))}
-              </div>
-            </li>
-          ))}
-        </ul>
+          <ul className="uforderList">
+            {unfulfilleddata.map((order, index) => (
+              <li key={index}>
+                <input
+                  type="radio"
+                  name="fulOption"
+                  value={order.order_id}
+                  onChange={handleOrderSelection}
+                />
+                {`${order.order_id}`}
+                <div className="pendingOrder">
+                  {Object.keys(order).map((key) => (
+                    <p>
+                      {key}: {order[key]}
+                    </p>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ul>
         ) : (
           <p>No fulfilled orders.</p>
         )}
-        <button>Save</button>
+        <button type="submit">Save</button>
       </form>
 
       <h1>Fulfilled Orders</h1>

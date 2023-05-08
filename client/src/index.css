@@ -200,7 +200,9 @@ textarea{
 /* Order Page Styling*/
 
 .orders{
-  padding: 150px 10% 125px 10%;
+  padding: 150px 10% 125px 10%; 
+  border: 1px black solid;
+  
 }
 
 .orders input[type = "number"]{
@@ -214,6 +216,7 @@ textarea{
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  
 }
 
 .orders .items{
@@ -223,6 +226,29 @@ textarea{
   height: 275px;
   text-align: center;
 }
+
+.alert{
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  top: 125px;
+}
+
+.alert span{
+  background-color: rgba(85, 151, 14, 0.5);
+  padding: 20px;
+  border-radius: 30px;
+  animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut{
+  0%{opacity: 1;}
+  75%{opacity: 1;}
+  100%{opacity: 0;}
+}
+
+
 
 /* Profile Page Styling*/
 
@@ -265,11 +291,14 @@ border-radius: 5px;
 
 .cart{
   padding: 150px 10% 125px 10%;
+  
 }
 
 .cart-container{
   display: flex;
+  
 }
+
 
 /*SignUp Page*/
 .sign-container{

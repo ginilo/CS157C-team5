@@ -20,7 +20,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     secret: "wow a secret",
-    cookie: { maxAge: 3600000}
+    cookie: { maxAge: 36000000}
 }));
 
 app.use(cors({origin: 'http://localhost:3000', methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"], optionsSuccessStatus: 200, credentials: true}));

@@ -23,7 +23,7 @@ router.post('/add', async (req, res) => {
         return;
     }
     const product_id = req.body.product_id;
-    const quantity = req.body.quantity;
+    const quantity = req.body.qty;
     const account_id = req.session.user.account_id;
 
     const cartKey = "cart_" + account_id;
@@ -31,11 +31,15 @@ router.post('/add', async (req, res) => {
     
     try {
         await client.hSet(cartKey, product_id, quantity)
+        await client.zIncrBy("popular", 1, product_id)
         res.status(200).send('done')
     } catch (err) {
         res.status(500).send(err.message)
     }
 })
+
+
+
 
 //ended up not using this api, I deleted the cart as soon as they checkedout
 router.post('/remove', async (req, res) => {
