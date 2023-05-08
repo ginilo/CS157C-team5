@@ -82,17 +82,16 @@ export default function Orders() {
 
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const handleSubmit  = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     await fetch(`http://localhost:5000/products/all/${selectedCategory}`)
-        .then(async (response) => {
-          const jsonData = await response.json();
-          setData(jsonData);
-        })
-        .catch((error) => {
-          console.error("There was an error:", error);
-        });
-    
+      .then(async (response) => {
+        const jsonData = await response.json();
+        setData(jsonData);
+      })
+      .catch((error) => {
+        console.error("There was an error:", error);
+      });
   };
 
   return (
@@ -135,18 +134,21 @@ export default function Orders() {
         <form className="catFilter" onSubmit={handleSubmit}>
           {categoryList.map((item, index) => (
             <div>
-              <input
-                key={index}
-                type="radio"
-                name="category"
-                value={item}
-                checked={selectedCategory === item}
-                onChange={(event) => setSelectedCategory(event.target.value)}
-              ></input>
-              <label htmlFor="category">{item}</label>
+              <label>
+                <input
+                  key={index}
+                  type="radio"
+                  name="category"
+                  value={item}
+                  checked={selectedCategory === item}
+                  onChange={(event) => setSelectedCategory(event.target.value)}
+                ></input>
+                <span>{item}</span>
+              </label>
             </div>
           ))}
-          <button>Filter</button>
+          <button type="submit">Filter</button>
+          <input type="button" value="Reset Filter"></input>
         </form>
 
         {data ? (
