@@ -12,9 +12,8 @@ export default function Cart() {
             // Further processing for logged in user
           } else {
             // loggedIn is false
-            console.log("User not logged in");
+            console.log("User not logged in.");
             window.location.href = "/SignIn";
-            // Further processing for non-logged in user
           }
         })
         .catch((error) => {
@@ -55,6 +54,7 @@ export default function Cart() {
         headers: {
           "Content-Type": "application/json", // Specify the content type as JSON
         },
+        credentials: "include",
         body: JSON.stringify({ pickedDate: date }),
       }).then(async (response) => {
         console.log("checking out...");
@@ -64,18 +64,50 @@ export default function Cart() {
     }
   };
 
+  const handleDeleteClick = async (product_id, quantity) => {
+    console.log(quantity)
+    try {
+      await fetch("http://localhost:5000/cart/remove", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ product_id , quantity}),
+      }).then(async (response) => {
+        console.log("Deleting...");
+      });
+      // Perform any necessary actions after deleting the item
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
   return (
     <div className="cart">
-      <h1>Shopping Cart</h1>
       {data && Object.keys(data).length > 0 ? (
         <div className="cart-container">
           <div className="cart-items">
-            <div>
-              <h2>Items:</h2>
-              <pre>{JSON.stringify(data, null, 2)}</pre>
-              <p>Total Items: {Object.keys(data).length} </p>
-            </div>
+            <h1>My Cart</h1>
+            <h2>Items:</h2>
+            <hr></hr>
+            {data.map((item, index) => (
+              <div>
+                <div className="items" key={index}>
+                  <img src={item.image_url} alt="item"></img>
+                  <p>{item.name}</p>
+                  <p>Qty: {item.quantity}</p>
+                  <p>Category: {item.category}</p>
+                  <p>Allergy: {item.allergy}</p>
+
+                  <button onClick={() => handleDeleteClick(item.product_id, item.quantity)}>Delete</button>
+                </div>
+                <hr></hr>
+              </div>
+            ))}
+            <p>Total Items: {Object.keys(data).length} </p>
           </div>
+
           <div className="checkout">
             <h2>Schedule a pickup date</h2>
             <p>Pickup Date: </p>

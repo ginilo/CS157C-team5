@@ -5,8 +5,6 @@ const client = require("../redisClient");
 router.get("/all/:category?", async (req, res) => {
   //res.send('products route here')
   try {
-    console.log("req.params.category")
-    console.log(req.params.category)
     let list = [];
     const product_keys = await client.keys("product_*");
     for (let i = 0; i < product_keys.length; i++) {
@@ -30,7 +28,7 @@ router.get("/popular", async (req, res) => {
     const highestScores = list.slice(-4);
     const popularList = [];
 
-    for (let i = 0; i < highestScores.length; i++) {
+    for (let i = highestScores.length - 1; i >= 0; i--) {
       const product = await client.hGetAll(highestScores[i]);
       const item = await getProduct(product.product_id);
       popularList.push(item);

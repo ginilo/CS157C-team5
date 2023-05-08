@@ -328,7 +328,29 @@ border-radius: 5px;
 
 .cart-container{
   display: flex;
-  
+  width: 100%;
+
+}
+
+.cart-items{
+  margin-right: 10%;
+  width: 100%;
+}
+
+
+
+.cart-items .items{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+.cart-items img{
+  width: 75px;
 }
 
 

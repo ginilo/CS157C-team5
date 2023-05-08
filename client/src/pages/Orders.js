@@ -2,19 +2,26 @@ import React, { useState, useEffect } from "react";
 
 export default function Orders() {
   const [data, setData] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [qty, setQty] = useState(0);
 
   useEffect(() => {
-    (async () => {
-      await fetch(`http://localhost:5000/products/all/${selectedCategory}`)
-        .then(async (response) => {
-          const jsonData = await response.json();
-          setData(jsonData);
-        })
-        .catch((error) => {
-          console.error("There was an error:", error);
-        });
-    })();
-  }, []);
+    fetchData();
+  }, [selectedCategory, qty]);
+
+  const fetchData = async () => {
+    try {
+      const url = selectedCategory
+        ? `http://localhost:5000/products/all/${selectedCategory}`
+        : "http://localhost:5000/products/all";
+      
+      const response = await fetch(url);
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      console.error("There was an error:", error);
+    }
+  };
 
   const handleAdd = async (item) => {
     setShowAlert(item);
@@ -39,7 +46,7 @@ export default function Orders() {
     }
   };
 
-  const [qty, setQty] = useState(0);
+  
 
   const handleQuantityChange = (e, index) => {
     const newQuantity = parseInt(e.target.value, 10) || 0; // Parse the input value as an integer or default to 0
@@ -80,7 +87,7 @@ export default function Orders() {
     })();
   }, []);
 
-  const [selectedCategory, setSelectedCategory] = useState("");
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -92,6 +99,11 @@ export default function Orders() {
       .catch((error) => {
         console.error("There was an error:", error);
       });
+  };
+
+  const handleResetFilter = async () => {
+    setSelectedCategory("");
+   
   };
 
   return (
@@ -131,7 +143,7 @@ export default function Orders() {
         )}
 
         <h2>Categories</h2>
-        <form className="catFilter" onSubmit={handleSubmit}>
+        <form className="catFilter">
           {categoryList.map((item, index) => (
             <div>
               <label>
@@ -147,8 +159,7 @@ export default function Orders() {
               </label>
             </div>
           ))}
-          <button type="submit">Filter</button>
-          <input type="button" value="Reset Filter"></input>
+          <input type="button" value="Reset Filter" onClick={handleResetFilter}></input>
         </form>
 
         {data ? (
