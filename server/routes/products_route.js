@@ -2,14 +2,20 @@ const express = require("express");
 const router = express.Router();
 const client = require("../redisClient");
 
-router.get("/all", async (req, res) => {
+router.get("/all/:category?", async (req, res) => {
   //res.send('products route here')
   try {
+    console.log("req.params.category")
+    console.log(req.params.category)
     let list = [];
     const product_keys = await client.keys("product_*");
     for (let i = 0; i < product_keys.length; i++) {
       const item = await getProduct(product_keys[i]);
-      list.push(item);
+      if (req.params.category && item.category === req.params.category) {
+        list.push(item);
+      } else if (!req.params.category) {
+        list.push(item);
+      }
     }
     res.status(200).send(list);
   } catch (err) {
@@ -29,8 +35,6 @@ router.get("/popular", async (req, res) => {
       const item = await getProduct(product.product_id);
       popularList.push(item);
     }
-    console.log(popularList);
-
     res.status(200).send(popularList);
   } catch (err) {
     res.status(500).send(err.message);
@@ -164,6 +168,8 @@ router.delete("/item/delete/:id", async (req, res) => {
   }
 });
 
+
+/*Ended up not using this one, I used the products/all and added a category param*/
 router.get("/category/categories/all", async (req, res) => {
   try {
     const categories = await client.sMembers("categories");
