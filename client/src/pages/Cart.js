@@ -23,19 +23,81 @@ export default function Cart() {
     })();
   }, []);
 
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await fetch("http://localhost:5000/cart/", {
+          credentials: "include",
+          method: "GET",
+        }).then(async (response) => {
+          const jsonData = await response.json();
+          setData(jsonData);
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    })();
+  }, []);
+
+  const [date, setDate] = useState("");
+
+  const handleInputChange = (event) => {
+    setDate(event.target.value);
+  };
+
+  const handleCheckOut = async () => {
+    try {
+      await fetch("http://localhost:5000/orders/create", {
+        credentials: "include",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Specify the content type as JSON
+        },
+        body: JSON.stringify({ pickedDate: date }),
+      }).then(async (response) => {
+        console.log("checking out...");
+      });
+    } catch (error) {
+      console.error("Error posting data:", error);
+    }
+  };
+
   return (
     <div className="cart">
       <h1>Shopping Cart</h1>
-      <div className="cart-container">
-        <div className="cart-items">
-          <p>Total Items: </p>
-        </div>
-        <div className="checkout">
-          <h2>Order Summary</h2>
-          <p>Pickup Date: </p>
-          <input type="date" class="calendar-input"></input>
-        </div>
-      </div>
+        {data && Object.keys(data).length > 0  ? (
+          <div className="cart-container">
+          <div className="cart-items">
+            <div>
+              <h2>Items:</h2>
+              <pre>{JSON.stringify(data, null, 2)}</pre>
+              <p>Total Items: {Object.keys(data).length} </p>
+            </div>
+            
+          </div>
+          <div className="checkout">
+              <h2>Schedule a pickup date</h2>
+              <p>Pickup Date: </p>
+              <form onSubmit={handleCheckOut}>
+                <input
+                  type="date"
+                  onChange={handleInputChange}
+                  value={date}
+                  name="pickedDate"
+                  className="calendar-input"
+                  required
+                ></input>
+                <p></p>
+                <button type="submit">Checkout</button>
+              </form>
+            </div>
+          </div>
+        ) : (
+          <p>You do not have any items in your cart.</p>
+        )}
+      
     </div>
   );
 }

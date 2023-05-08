@@ -23,7 +23,7 @@ app.use(session({
     cookie: { maxAge: 3600000}
 }));
 
-app.use(cors({origin: 'http://localhost:3000', methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"], optionsSuccessStatus: 200, credentials: true}));
+app.use(cors({origin: 'http://localhost:3000', methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"], optionsSuccessStatus: 200, credentials: true}));
 
 //listening port number
 const PORT_NUMBER = 5000;

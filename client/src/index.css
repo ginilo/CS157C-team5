@@ -49,6 +49,7 @@ button{
   border-radius: 25px;
   border: 1px solid darkgray;
   background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
 /* Home Page Styling*/
@@ -202,6 +203,13 @@ textarea{
   padding: 150px 10% 125px 10%;
 }
 
+.orders input[type = "number"]{
+  padding: 0px;
+  border-radius: 2px;
+  margin: 0px 10px 0 2px;
+  height: 30px;
+}
+
 .orders .item-container{
   display: flex;
   justify-content: space-evenly;
@@ -209,7 +217,7 @@ textarea{
 }
 
 .orders .items{
-  border: 1px solid black;
+  border: 1px solid rgb(200, 197, 197);
   margin-top: 10px;
   width: 275px;
   height: 275px;
@@ -283,3 +291,48 @@ border-radius: 5px;
 .error-message{
   color: red;
 }
+
+/*Previous Orders page*/
+
+.prevOrders{
+  text-align: center;
+  padding: 150px 10% 125px 10%;
+}
+
+
+/*Employee Portal page*/
+
+.employee-container{
+  text-align: center;
+  padding: 150px 10% 125px 10%;
+
+}
+
+.employee-container .productForm{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+}
+
+.pendingOrder{
+  display: flex;
+}
+
+.uforderList{
+  text-align: left;
+  list-style: none;
+}
+
+.uforderList li{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: solid 1px rgb(220, 220, 220);
+}
+
+.uforderList li p{
+  display: flex;
+  padding-right: 5px;
+}
+

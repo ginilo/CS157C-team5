@@ -28,6 +28,7 @@ router.post('/add', async (req, res) => {
 
     const cartKey = "cart_" + account_id;
 
+    
     try {
         await client.hSet(cartKey, product_id, quantity)
         res.status(200).send('done')
@@ -36,6 +37,7 @@ router.post('/add', async (req, res) => {
     }
 })
 
+//ended up not using this api, I deleted the cart as soon as they checkedout
 router.post('/remove', async (req, res) => {
     if (req.session.user == null) {
         res.status(401).send("not logged in");

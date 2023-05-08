@@ -8,6 +8,8 @@ import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import SignUp from "./pages/Signup";
 import SignIn from "./pages/Signin";
+import PreviousOrders from "./pages/PreviousOrders";
+import EmployeePortal from "./pages/EmployeePortal";
 import {Route, Routes} from "react-router-dom";
 import './App.css';
 
@@ -24,6 +26,8 @@ function App() {
         <Route path = "/Profile" element = {<Profile />} />
         <Route path = "/SignUp" element = {<SignUp />} />
         <Route path = "/SignIn" element = {<SignIn/>} />
+        <Route path = "/PreviousOrders" element = {<PreviousOrders/>} />
+        <Route path = "/EmployeePortal" element = {<EmployeePortal/>} />
 
       </Routes>
       <Footer />
