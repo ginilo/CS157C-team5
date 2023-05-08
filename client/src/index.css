@@ -44,8 +44,10 @@ code {
   border: 1px solid white;
 }
 
-button{
-  padding: 10px 30px;
+button, input[type = "button"]{
+  font-size: 12px;
+  height: 40px;
+  padding: 0px 30px;
   border-radius: 25px;
   border: 1px solid darkgray;
   background-color: rgba(0, 0, 0, 0);
@@ -252,6 +254,32 @@ textarea{
   justify-content: space-evenly;
 }
 
+.catFilter input[type = "radio"]{
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.catFilter input:checked + span {
+  background-color: #000;
+  color: #fff;
+}
+
+
+.catFilter span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  height: 40px;
+  padding: 0px 30px;
+  border-radius: 25px;
+  border: 1px solid darkgray;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+
 
 
 /* Profile Page Styling*/
@@ -300,7 +328,29 @@ border-radius: 5px;
 
 .cart-container{
   display: flex;
-  
+  width: 100%;
+
+}
+
+.cart-items{
+  margin-right: 10%;
+  width: 100%;
+}
+
+
+
+.cart-items .items{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+.cart-items img{
+  width: 75px;
 }
 
 
