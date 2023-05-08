@@ -44,7 +44,13 @@ router.post('/add', async (req, res) => {
         let newQuantity = oldQuantity - quantity;
         await client.hSet(product_id, "quantity", newQuantity)
 
-        await client.hSet(cartKey, product_id, quantity)
+        const oldcartQuantity = await client.hGet(cartKey, product_id);
+        const newCartQuantity = parseInt(quantity)
+
+        if(oldcartQuantity !== null){ console.log("HI"); newCartQuantity = newCartQuantity + oldcartQuantity;}
+
+        //add to the quantity to the cart 
+        await client.hSet(cartKey, product_id, newCartQuantity)
         await client.zIncrBy("popular", 1, product_id)
         res.status(200).send('done')
     } catch (err) {
@@ -63,7 +69,7 @@ router.post('/remove', async (req, res) => {
     const quantity = parseInt(req.body.quantity);
 
     const cartKey = "cart_" + account_id;
-    console.log(product_id)
+    
 
 
     try {

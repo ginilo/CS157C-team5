@@ -83,8 +83,9 @@ router.post('/FulfillOrder', async (req, res) => {
 async function getOrders(order_ids) {
     try {
         let orderList = [];
-        for (let i = 0; i < order_ids.length; i ++ ) {
+        for (let i in order_ids ) {
             const item = await client.hGetAll(order_ids[i])
+            item.order_id = order_ids[i]
             orderList.push(item)
         }
         return orderList;
@@ -117,6 +118,7 @@ router.post("/create", async (req, res) => {
     const key = "order_" + id;
     
     const account_id = req.session.user.account_id;
+    const username = req.session.user.username
 
     const cart = await client.HGETALL("cart_" + account_id);
     
@@ -126,6 +128,21 @@ router.post("/create", async (req, res) => {
     const status = "Placed";
     const placeDate = new Date().toDateString();
     try {
+
+        const last_visited = await client.hGet(username, "last_visited");
+        const lastDate = new Date(last_visited);
+
+        const compareDate = new Date(pickup_date)
+      
+        // Calculate the difference between the two dates in milliseconds
+        const differenceInMilliseconds = compareDate - lastDate;
+      
+        // Convert the milliseconds difference into days
+        const differenceInDays = Math.floor(differenceInMilliseconds / (24 * 60 * 60 * 1000));
+      
+        console.log(differenceInDays)
+        // Check if the dates are a calendar week apart
+        if (differenceInDays >= 7) {
         await client.lPush(listKey, key);
         for (const x in cart) {
             await client.hSet(key, x, cart[x]);
@@ -136,9 +153,12 @@ router.post("/create", async (req, res) => {
         await client.hSet(key, "status", status);
         await client.hSet(key, "order_placed", placeDate);
 
+        await client.hSet(username, "last_visited", pickup_date)
+
         await client.del("cart_" + account_id);
 
-        res.status(201).send("done");
+        res.status(201).send("done");}
+        else res.status(200).send("short")
     } catch (err) {
         res.status(500).send(err.message)
     }

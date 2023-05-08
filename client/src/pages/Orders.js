@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 export default function Orders() {
   const [data, setData] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -39,6 +40,8 @@ export default function Orders() {
           },
           body: JSON.stringify(item),
         }).then(async (response) => {
+          item.quantity -= qty;
+          console.log(item.quantity)
           console.log("adding item");
         });
       } catch (error) {
