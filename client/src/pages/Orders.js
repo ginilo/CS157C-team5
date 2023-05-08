@@ -14,7 +14,7 @@ export default function Orders() {
       const url = selectedCategory
         ? `http://localhost:5000/products/all/${selectedCategory}`
         : "http://localhost:5000/products/all";
-      
+
       const response = await fetch(url);
       const jsonData = await response.json();
       setData(jsonData);
@@ -24,33 +24,42 @@ export default function Orders() {
   };
 
   const handleAdd = async (item) => {
-    setShowAlert(item);
-
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 5000);
-    item["qty"] = qty;
-    try {
-      await fetch("http://localhost:5000/cart/add", {
-        credentials: "include",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", // Specify the content type as JSON
-        },
-        body: JSON.stringify(item),
-      }).then(async (response) => {
-        console.log("adding item");
-      });
-    } catch (error) {
-      console.error("Error posting data:", error);
+    if (qty > 0) {
+      setShowAlert(item);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 5000);
+      item["qty"] = qty;
+      try {
+        await fetch("http://localhost:5000/cart/add", {
+          credentials: "include",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Specify the content type as JSON
+          },
+          body: JSON.stringify(item),
+        }).then(async (response) => {
+          console.log("adding item");
+        });
+      } catch (error) {
+        console.error("Error posting data:", error);
+      }
     }
   };
 
-  
-
   const handleQuantityChange = (e, index) => {
     const newQuantity = parseInt(e.target.value, 10) || 0; // Parse the input value as an integer or default to 0
-    setQty(newQuantity);
+    const selectedItem = data[index];
+
+    if (newQuantity > selectedItem.quantity) {
+      console.log("Tried to input a number greater than In stock quantity.");
+      setQty(0);
+    } else if (newQuantity < 1) {
+      setQty(0);
+      console.log("Tried to input a number less than In stock quantity.");
+    } else {
+      setQty(newQuantity);
+    }
   };
 
   const [showAlert, setShowAlert] = useState(null);
@@ -62,7 +71,6 @@ export default function Orders() {
       await fetch("http://localhost:5000/products/popular")
         .then(async (response) => {
           const jsonData = await response.json();
-          console.log(jsonData);
           setPopularList(jsonData);
         })
         .catch((error) => {
@@ -78,7 +86,6 @@ export default function Orders() {
       await fetch("http://localhost:5000/products/category/categories/all")
         .then(async (response) => {
           const jsonData = await response.json();
-          console.log(jsonData);
           setCategoryList(jsonData);
         })
         .catch((error) => {
@@ -87,23 +94,8 @@ export default function Orders() {
     })();
   }, []);
 
-  
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    await fetch(`http://localhost:5000/products/all/${selectedCategory}`)
-      .then(async (response) => {
-        const jsonData = await response.json();
-        setData(jsonData);
-      })
-      .catch((error) => {
-        console.error("There was an error:", error);
-      });
-  };
-
   const handleResetFilter = async () => {
     setSelectedCategory("");
-   
   };
 
   return (
@@ -159,7 +151,11 @@ export default function Orders() {
               </label>
             </div>
           ))}
-          <input type="button" value="Reset Filter" onClick={handleResetFilter}></input>
+          <input
+            type="button"
+            value="Reset Filter"
+            onClick={handleResetFilter}
+          ></input>
         </form>
 
         {data ? (
@@ -172,9 +168,9 @@ export default function Orders() {
                 <label htmlFor="quantity">Qty:</label>
                 <input
                   type="number"
-                  min="1"
+                  min = "1"
                   className="quantity"
-                  max={item.quantity}
+                  max = {item.quantity}
                   value={item.quantitySelected}
                   onChange={(e) => handleQuantityChange(e, index)}
                 />
