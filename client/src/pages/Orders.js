@@ -5,7 +5,7 @@ export default function Orders() {
 
   useEffect(() => {
     (async () => {
-      await fetch("http://localhost:5000/products/all")
+      await fetch(`http://localhost:5000/products/all/${selectedCategory}`)
         .then(async (response) => {
           const jsonData = await response.json();
           setData(jsonData);
@@ -64,6 +64,37 @@ export default function Orders() {
     })();
   }, []);
 
+  const [categoryList, setCategoryList] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      await fetch("http://localhost:5000/products/category/categories/all")
+        .then(async (response) => {
+          const jsonData = await response.json();
+          console.log(jsonData);
+          setCategoryList(jsonData);
+        })
+        .catch((error) => {
+          console.error("There was an error:", error);
+        });
+    })();
+  }, []);
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleSubmit  = async (event) => {
+    event.preventDefault();
+    await fetch(`http://localhost:5000/products/all/${selectedCategory}`)
+        .then(async (response) => {
+          const jsonData = await response.json();
+          setData(jsonData);
+        })
+        .catch((error) => {
+          console.error("There was an error:", error);
+        });
+    
+  };
+
   return (
     <div>
       {showAlert && (
@@ -101,7 +132,23 @@ export default function Orders() {
         )}
 
         <h2>Categories</h2>
-        <h2>All Items</h2>
+        <form className="catFilter" onSubmit={handleSubmit}>
+          {categoryList.map((item, index) => (
+            <div>
+              <input
+                key={index}
+                type="radio"
+                name="category"
+                value={item}
+                checked={selectedCategory === item}
+                onChange={(event) => setSelectedCategory(event.target.value)}
+              ></input>
+              <label htmlFor="category">{item}</label>
+            </div>
+          ))}
+          <button>Filter</button>
+        </form>
+
         {data ? (
           <div className="item-container">
             {data.map((item, index) => (

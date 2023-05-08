@@ -200,9 +200,7 @@ textarea{
 /* Order Page Styling*/
 
 .orders{
-  padding: 150px 10% 125px 10%; 
-  border: 1px black solid;
-  
+  padding: 150px 10% 125px 10%;
 }
 
 .orders input[type = "number"]{
@@ -236,7 +234,7 @@ textarea{
 }
 
 .alert span{
-  background-color: rgba(85, 151, 14, 0.5);
+  background-color: rgba(199, 218, 179, 0.7);
   padding: 20px;
   border-radius: 30px;
   animation: fadeOut 5s forwards;
@@ -246,6 +244,12 @@ textarea{
   0%{opacity: 1;}
   75%{opacity: 1;}
   100%{opacity: 0;}
+}
+
+.catFilter{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 
