@@ -13,6 +13,63 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/FOrders', async (req, res) => {
+    try {    
+        const allOrdersList = await client.keys("order_*")
+        const orders = await getfulfilledOrders(allOrdersList);
+        res.status(200).send(orders)
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+})
+
+async function getfulfilledOrders(order_ids) {
+    try {
+        let orderList = [];
+        for (let i = 0; i < order_ids.length; i ++ ) {
+            const item = await client.hGetAll(order_ids[i])
+            
+            if(item.status ===  "Fulfilled"){
+                orderList.push(item)
+            }
+            
+        }
+        return orderList;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+router.get('/UFOrders', async (req, res) => {
+    try {    
+        const allOrdersList = await client.keys("order_*")
+        const orders = await getUnfulfilledOrders(allOrdersList);
+        res.status(200).send(orders)
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+})
+
+async function getUnfulfilledOrders(order_ids) {
+    try {
+        let orderList = [];
+        for (let i = 0; i < order_ids.length; i ++ ) {
+            const item = await client.hGetAll(order_ids[i])
+            
+            if(item.status ===  "Placed"){
+                item["order_id"] = order_ids[i]
+                orderList.push(item)
+            }
+            
+        }
+        return orderList;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+
 async function getOrders(order_ids) {
     try {
         let orderList = [];

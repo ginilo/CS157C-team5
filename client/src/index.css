@@ -49,6 +49,7 @@ button{
   border-radius: 25px;
   border: 1px solid darkgray;
   background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
 /* Home Page Styling*/
@@ -312,5 +313,26 @@ border-radius: 5px;
   flex-direction: column;
   text-align: left;
 
+}
+
+.pendingOrder{
+  display: flex;
+}
+
+.uforderList{
+  text-align: left;
+  list-style: none;
+}
+
+.uforderList li{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: solid 1px rgb(220, 220, 220);
+}
+
+.uforderList li p{
+  display: flex;
+  padding-right: 5px;
 }
 
