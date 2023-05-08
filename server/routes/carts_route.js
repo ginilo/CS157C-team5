@@ -25,11 +25,15 @@ router.post('/add', async (req, res) => {
     const product_id = req.body.product_id;
     const quantity = req.body.qty;
     const account_id = req.session.user.account_id;
-
     const cartKey = "cart_" + account_id;
 
     
     try {
+        //decrease product quantity
+        let oldQuantity = await client.hGet(product_id, "quantity")
+        let newQuantity = oldQuantity - quantity;
+        await client.hSet(product_id, "quantity", newQuantity)
+
         await client.hSet(cartKey, product_id, quantity)
         await client.zIncrBy("popular", 1, product_id)
         res.status(200).send('done')
