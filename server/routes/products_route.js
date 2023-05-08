@@ -17,6 +17,26 @@ router.get("/all", async (req, res) => {
   }
 });
 
+router.get("/popular", async (req, res) => {
+  try {
+    const list = await client.ZRANGE("popular", 0, -1);
+
+    const highestScores = list.slice(-4);
+    const popularList = [];
+
+    for (let i = 0; i < highestScores.length; i++) {
+      const product = await client.hGetAll(highestScores[i]);
+      const item = await getProduct(product.product_id);
+      popularList.push(item);
+    }
+    console.log(popularList);
+
+    res.status(200).send(popularList);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 router.get("/category/:category", async (req, res) => {
   const key = req.params.category;
   try {
@@ -65,7 +85,7 @@ async function getProduct(product_id) {
   let item = {};
   try {
     item = await client.hGetAll(product_id);
-    if(Object.keys(item).length > 0 ) item["product_id"] = product_id;
+    if (Object.keys(item).length > 0) item["product_id"] = product_id;
   } catch (err) {
     console.log(err.message);
   }
@@ -73,7 +93,6 @@ async function getProduct(product_id) {
 }
 
 router.get("/item/:id", async (req, res) => {
-    
   const product_id = req.params.id;
   try {
     const item = await getProduct("product_" + product_id);

@@ -68,6 +68,16 @@ async function getUnfulfilledOrders(order_ids) {
     }
 }
 
+router.post('/FulfillOrder', async (req, res) => {
+    const order_id = req.body.order_id;
+    console.log(order_id)
+    try {
+        await client.hSet(order_id, "status", "Fulfilled");
+        res.status(201).send("done");
+      } catch (err) {
+        res.status(500).send(err.message);
+      }
+})
 
 
 async function getOrders(order_ids) {

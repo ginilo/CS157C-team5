@@ -67,37 +67,35 @@ export default function Cart() {
   return (
     <div className="cart">
       <h1>Shopping Cart</h1>
-        {data && Object.keys(data).length > 0  ? (
-          <div className="cart-container">
+      {data && Object.keys(data).length > 0 ? (
+        <div className="cart-container">
           <div className="cart-items">
             <div>
               <h2>Items:</h2>
               <pre>{JSON.stringify(data, null, 2)}</pre>
               <p>Total Items: {Object.keys(data).length} </p>
             </div>
-            
           </div>
           <div className="checkout">
-              <h2>Schedule a pickup date</h2>
-              <p>Pickup Date: </p>
-              <form onSubmit={handleCheckOut}>
-                <input
-                  type="date"
-                  onChange={handleInputChange}
-                  value={date}
-                  name="pickedDate"
-                  className="calendar-input"
-                  required
-                ></input>
-                <p></p>
-                <button type="submit">Checkout</button>
-              </form>
-            </div>
+            <h2>Schedule a pickup date</h2>
+            <p>Pickup Date: </p>
+            <form onSubmit={handleCheckOut}>
+              <input
+                type="date"
+                onChange={handleInputChange}
+                value={date}
+                name="pickedDate"
+                className="calendar-input"
+                required
+              ></input>
+              <p></p>
+              <button type="submit">Checkout</button>
+            </form>
           </div>
-        ) : (
-          <p>You do not have any items in your cart.</p>
-        )}
-      
+        </div>
+      ) : (
+        <p>You do not have any items in your cart.</p>
+      )}
     </div>
   );
 }
