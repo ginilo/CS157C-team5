@@ -28,19 +28,24 @@ export default function Cart() {
 
   useEffect(() => {
     (async () => {
-      try {
-        await fetch("http://localhost:5000/cart/", {
-          credentials: "include",
-          method: "GET",
-        }).then(async (response) => {
-          const jsonData = await response.json();
-          setData(jsonData);
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      const cartData = await fetchCartData();
+      setData(cartData);
     })();
   }, []);
+
+  const fetchCartData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/cart/", {
+        credentials: "include",
+        method: "GET",
+      });
+      const jsonData = await response.json();
+      return jsonData;
+    } catch (error) {
+      console.error("Error fetching cart data:", error);
+      return null;
+    }
+  };
 
   const [date, setDate] = useState("");
 
@@ -78,6 +83,8 @@ export default function Cart() {
         body: JSON.stringify({ product_id, quantity }),
       }).then(async (response) => {
         console.log("Deleting...");
+        const updatedCartData = await fetchCartData();
+        setData(updatedCartData);
       });
       // Perform any necessary actions after deleting the item
     } catch (error) {
@@ -125,7 +132,7 @@ export default function Cart() {
             <p>Pickup Date: </p>
             <form onSubmit={handleCheckOut}>
               <input
-                type="date"
+                type="datetime-local"
                 onChange={handleInputChange}
                 value={date}
                 name="pickedDate"
