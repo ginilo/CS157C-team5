@@ -66,7 +66,7 @@ export default function SignIn() {
           <button>Login</button>
         </form>
         <p>
-          New to SJSU Pantry? <a href="/Signup">Create an account</a>
+          New to SJSU Pantry? <a href="/Signup">Create an account</a> || <a href="/EmployeeSignIn">Employee Login</a>
         </p>
       </div>
     </div>

@@ -12,6 +12,7 @@ import PreviousOrders from "./pages/PreviousOrders";
 import EmployeePortal from "./pages/EmployeePortal";
 import {Route, Routes} from "react-router-dom";
 import './App.css';
+import EmployeeSignIn from "./pages/EmployeeSignIn";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path = "/SignIn" element = {<SignIn/>} />
         <Route path = "/PreviousOrders" element = {<PreviousOrders/>} />
         <Route path = "/EmployeePortal" element = {<EmployeePortal/>} />
+        <Route path = "/EmployeeSignIn" element = {<EmployeeSignIn/>} />
 
       </Routes>
       <Footer />
