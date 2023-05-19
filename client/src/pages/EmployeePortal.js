@@ -376,7 +376,16 @@ export default function EmployeePortal() {
       <h1>Fulfilled Orders</h1>
       {orderdata && Object.keys(orderdata).length > 0 ? (
         <div>
-          <pre>{JSON.stringify(orderdata, null, 2)}</pre>
+          {orderdata.map((order, index) => (
+                <div className="fulOrders">
+                  {Object.keys(order).map((key) => (
+                    <div className = "fulOrdersItem">
+                      {key}: {order[key]}
+                    </div>
+                  ))}
+                </div>
+              
+            ))}
         </div>
       ) : (
         <p>No fulfilled orders.</p>

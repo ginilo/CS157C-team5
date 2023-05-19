@@ -75,8 +75,11 @@ export default function Profile() {
           
           <p>{data.fname + " " +  data.lname}</p>
           
-   
+          
+    <button>Edit Profile</button>
+    <p></p>
     <button onClick = {handleLogOut}>Log out</button>
+    
           </div>
 
           <div className = "profileinfo">
@@ -86,6 +89,7 @@ export default function Profile() {
             <p>📧 Email: {data.email}</p>
             <p>🌱 Last time visited: {data.last_visited}</p>
             <button><a href = "/PreviousOrders">See previous orders</a></button>
+            
             </div>
           
         </div>

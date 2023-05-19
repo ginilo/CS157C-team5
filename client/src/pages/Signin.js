@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
 
 export default function SignIn() {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -22,7 +21,7 @@ export default function SignIn() {
       .then(async (response) => {
         if (response.ok) {
           const data = await response.text();
-          if (data == "logged in") {
+          if (data === "logged in") {
             setValid(true);
             window.location.href = "/Profile";
           } else {
@@ -66,7 +65,7 @@ export default function SignIn() {
           <button>Login</button>
         </form>
         <p>
-          New to SJSU Pantry? <a href="/Signup">Create an account</a> || <a href="/EmployeeSignIn">Employee Login</a>
+        New to SJSU Pantry? <a href="/Signup">Create an account</a> || <a href="/EmployeeSignIn">Employee Login</a>
         </p>
       </div>
     </div>

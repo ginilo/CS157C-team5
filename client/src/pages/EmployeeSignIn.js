@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
 
 export default function EmployeeSignIn() {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -22,7 +21,7 @@ export default function EmployeeSignIn() {
       .then(async (response) => {
         if (response.ok) {
           const data = await response.text();
-          if (data == "logged in") {
+          if (data === "logged in") {
             setValid(true);
             window.location.href = "/EmployeePortal";
           } else {

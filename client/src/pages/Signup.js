@@ -13,10 +13,6 @@ export default function SignUp() {
 
   const [form, setForm] = useState(initialFormState);
 
-  const resetForm = () => {
-    setForm(initialFormState);
-  };
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
@@ -37,7 +33,7 @@ export default function SignUp() {
     })
       .then(async (response) => {
         if (response.ok) {
-          if (await response.text() == "exists") {
+          if (await response.text() === "exists") {
             
             setValid(false);
             return response;

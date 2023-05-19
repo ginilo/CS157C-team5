@@ -22,6 +22,7 @@ code {
   width: 100%;
   background-color: #0067A7;
   color: white;
+  box-shadow: 0 2px 2px 3px rgba(0,0,0,.1);
 }
 
 .navlogo{
@@ -44,6 +45,13 @@ code {
   border: 1px solid white;
 }
 
+.nav button:hover{
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+
+
 button, input[type = "button"]{
   font-size: 12px;
   height: 40px;
@@ -52,6 +60,11 @@ button, input[type = "button"]{
   border: 1px solid darkgray;
   background-color: rgba(0, 0, 0, 0);
   cursor: pointer;
+}
+
+button:hover{
+  background-color: #D99800;
+  border-color: #D99800;
 }
 
 /* Home Page Styling*/
@@ -434,5 +447,19 @@ border-radius: 5px;
 .uforderList li p{
   display: flex;
   padding-right: 5px;
+}
+
+
+.fulOrders{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border: solid 1px rgb(220, 220, 220);
+  padding: 10px 0px;
+}
+
+.fulOrdersItem{
+display: flex;
+flex-direction: row;
 }
 
