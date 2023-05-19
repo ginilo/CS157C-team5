@@ -138,9 +138,10 @@ router.post("/item/update", async (req, res) => {
 
   try {
     if (field === "category") {
-      const oldCategory = await client.hGet(product_id, "category");
-      await client.sAdd(category, product_id);
-      await client.sAdd("categories", category);
+      const oldCategory = await client.hGet("product_" + product_id, "category");
+      await client.sRem(oldCategory, "product_" + product_id)
+      await client.sAdd(change,  "product_" + product_id);
+      await client.sAdd("categories", change);
     }
 
     //await client.sRem(oldCategory, product_id)
