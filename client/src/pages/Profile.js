@@ -74,8 +74,8 @@ export default function Profile() {
           {(data.account_type === 'student' || data.account_type === 'Student') && <p>Student</p>}
           
           <p>{data.fname + " " +  data.lname}</p>
-          <button>Edit Profile</button> 
-    <p></p>
+          
+   
     <button onClick = {handleLogOut}>Log out</button>
           </div>
 

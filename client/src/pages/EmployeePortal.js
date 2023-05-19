@@ -105,12 +105,14 @@ export default function EmployeePortal() {
 
   const [changeform, setChangeForm] = useState({
     change: "",
-    field: "",
+    field: "name",
     product_id: "",
   });
 
+
+
   const handleFieldChange = (e) => {
-    const selectedField = e.target.value;
+   const selectedField = e.target.value;
     setChangeForm({ ...changeform, field: selectedField });
   };
 
@@ -366,7 +368,7 @@ export default function EmployeePortal() {
             ))}
           </ul>
         ) : (
-          <p>No fulfilled orders.</p>
+          <p>No unfulfilled orders.</p>
         )}
         <button type="submit">Save</button>
       </form>
